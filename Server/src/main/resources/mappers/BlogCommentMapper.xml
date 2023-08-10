@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.server.mappers.BlogCommentMapper">
+    <select id="getComment" resultType="com.mobiusp.server.pojo.BlogComment">
+        select * from blog_comment where blog_id = #{blogid};
+    </select>
+    
+    <insert id="newParentComment">
+        insert into blog_comment values (null,#{arg0},#{arg1},null,null,#{arg3},#{arg2},now());
+    </insert>
+    
+    <insert id="newChildComment">
+        insert into blog_comment values (null,#{arg0},#{arg1},#{arg2},#{arg3},#{arg4},#{arg5},now());
+    </insert>
+</mapper>

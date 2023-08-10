@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.backstage.mappers.PublishMapper">
+    <insert id="newBlogContent">
+        insert into blog_content values(null, #{content});
+    </insert>
+
+    <insert id="newBlog">
+        insert into blogs values (null, #{arg0}, now(), #{arg1});
+    </insert>
+
+    <select id="getNewId" resultType="int">
+        select id from blogs order by id desc limit 1;
+    </select>
+</mapper>

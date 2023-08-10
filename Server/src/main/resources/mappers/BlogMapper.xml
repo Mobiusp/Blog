@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.server.mappers.BlogMapper">
+    <select id="getBlogs" resultType="com.mobiusp.server.pojo.Blog">
+        select * from blogs order by id desc limit 15 ;
+    </select>
+
+    <select id="countBlog" resultType="int" >
+        select COUNT(*) from blogs;
+    </select>
+
+    <select id="getBlogPage" resultType="com.mobiusp.server.pojo.Blog">
+        select * from blogs order by id desc limit #{ind}, 15;
+    </select>
+
+    <select id="getBlogBySearch" resultType="com.mobiusp.server.pojo.Blog">
+        SELECT * from blogs WHERE id in (SELECT id from (SELECT * from blog_content where LOCATE (#{arg0}, content) > 0 ORDER BY id desc limit #{arg1}, 15) as t);
+    </select>
+
+    <select id="countSearchBlog" resultType="int">
+        SELECT COUNT(*) from blog_content where LOCATE (#{arg0}, content) > 0;
+    </select>
+</mapper>

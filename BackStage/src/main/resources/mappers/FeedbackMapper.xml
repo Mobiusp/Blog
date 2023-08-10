@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.backstage.mappers.FeedbackMapper">
+    <select id="getUnhandledFeedback" resultType="com.mobiusp.backstage.pojo.FeedBack">
+        select * from feedback where isHandled = false order by id desc ;
+    </select>
+
+    <select id="getHandledFeedback" resultType="com.mobiusp.backstage.pojo.FeedBack">
+        select * from feedback where isHandled = true order by handled_time desc ;
+    </select>
+
+    <update id="changeUnhandledFeedback">
+        update feedback set isHandled = true , handled_time = NOW() where id = #{arg0};
+    </update>
+
+    <update id="changeHandledFeedback">
+        update feedback set isHandled = false , handled_time = null where id = #{arg0};
+    </update>
+
+    <select id="getChangeTime" resultType="java.sql.Timestamp">
+        select handled_time from feedback where id = #{id};
+    </select>
+</mapper>

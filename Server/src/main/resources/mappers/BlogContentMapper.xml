@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.server.mappers.BlogContentMapper">
+    <select id="getBlogContent" resultType="com.mobiusp.server.pojo.BlogContent">
+        select * from blog_content where id = #{id};
+    </select>
+
+    <select id="getBlogTitle" resultType="java.lang.String">
+        select title from blogs where id = #{id};
+    </select>
+</mapper>

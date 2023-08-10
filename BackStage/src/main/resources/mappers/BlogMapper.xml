@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mobiusp.backstage.mappers.BlogMapper">
+    <select id="getBlog" resultType="com.mobiusp.backstage.pojo.Blog">
+        select * from blogs limit #{index},12;
+    </select>
+
+    <select id="getBlogId" resultType="Integer">
+        select id from blogs;
+    </select>
+    
+    <select id="countBlog" resultType="Integer">
+        SELECT COUNT(*) from blogs;
+    </select>
+
+    <delete id="deleteBlog">
+        delete from blogs where id = #{id};
+    </delete>
+
+    <delete id="deleteContent">
+        delete from blog_content where id = #{id};
+    </delete>
+
+    <update id="updateBlog">
+        update blogs set title = #{arg1}, summary = #{arg2} where id = #{arg0};
+    </update>
+
+    <update id="updateContent">
+        update blog_content set content = #{arg1} where id = #{arg0};
+    </update>
+
+    <select id="getContent" resultType="String">
+        select content from blog_content where id = #{id};
+    </select>
+</mapper>
